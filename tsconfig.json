@@ -16,12 +16,9 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "declaration": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "importHelpers": true,
     "baseUrl": "./src",
-    "paths": {
-      "@lib/*": ["*"]
-    }
   },
   "include": ["src"]
 }

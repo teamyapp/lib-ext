@@ -1,3 +1,4 @@
-export { Extension} from './extension';
-export { ExtensionRuntime} from './runtime';
-export { RequiredAction, RequiredActionProps } from './requiredAction';
+export { ThirdPartyAppEventHub } from './event';
+export type { ThirdPartyAppClient } from './client';
+export type { ThirdPartyApp, ThirdPartyAppDeps } from './app';
+export type { RequiredActions, TaskIdAction } from './actions';
