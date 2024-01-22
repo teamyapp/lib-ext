@@ -13,14 +13,6 @@ export default defineConfig({
             formats: ['es'],
             fileName: (format) => `main.es.js`,
         },
-        rollupOptions: {
-            external: ['react'],
-            output: {
-                globals: {
-                    react: 'React'
-                }
-            },
-        },
     },
     plugins: [
         typescript2(),

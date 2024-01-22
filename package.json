@@ -1,7 +1,7 @@
 {
   "name": "@teamyapp/ext",
   "private": false,
-  "version": "0.0.9",
+  "version": "0.0.12",
   "main": "main.js",
   "module": "main.es.js",
   "typings": "main.d.ts",
