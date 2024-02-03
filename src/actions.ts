@@ -1,6 +1,6 @@
 import {ReactNode} from 'react';
 
-export interface RequiredActions {
+export interface RequiredAction {
     actionName: string;
     view: ReactNode;
 }
@@ -8,5 +8,5 @@ export interface RequiredActions {
 export interface TaskIdAction {
     key: string;
     view: ReactNode;
-    execute: (taskId: number) => void;
+    execute: () => void;
 }

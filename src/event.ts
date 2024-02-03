@@ -1,8 +1,8 @@
-import {RequiredActions, TaskIdAction} from './actions';
+import {RequiredAction, TaskIdAction} from './actions';
 import {ReactNode} from 'react';
 
 export interface ThirdPartyAppEventListener {
-    listenOnShowRequiredActions(callback: (onActionComplete: () => void) => Promise<RequiredActions[]>): void;
+    listenOnShowRequiredActions(callback: (onActionComplete: () => void) => Promise<RequiredAction[]>): void;
 
     listenOnShowTaskIdActions(callback: (taskId: number) => TaskIdAction[]): void;
 
@@ -10,7 +10,7 @@ export interface ThirdPartyAppEventListener {
 }
 
 export interface ThirdPartyAppEventPublisher {
-    onShowRequiredActions(onActionComplete: () => void): Promise<RequiredActions[]>;
+    onShowRequiredActions(onActionComplete: () => void): Promise<RequiredAction[]>;
 
     onShowTaskIdActions(taskId: number): TaskIdAction[];
 
@@ -19,7 +19,7 @@ export interface ThirdPartyAppEventPublisher {
 
 export class ThirdPartyAppEventHub implements ThirdPartyAppEventListener, ThirdPartyAppEventPublisher {
     private readonly _appId: number;
-    private onShowRequiredActionsCallback?: (onActionComplete: () => void) => Promise<RequiredActions[]>;
+    private onShowRequiredActionsCallback?: (onActionComplete: () => void) => Promise<RequiredAction[]>;
     private onShowTaskIdActionsCallback?: (taskId: number) => TaskIdAction[];
     private onShowAppSettingCallback?: () => ReactNode;
 
@@ -31,11 +31,11 @@ export class ThirdPartyAppEventHub implements ThirdPartyAppEventListener, ThirdP
         return this._appId;
     }
 
-    public listenOnShowRequiredActions(callback: (onActionComplete: () => void) => Promise<RequiredActions[]>): void {
+    public listenOnShowRequiredActions(callback: (onActionComplete: () => void) => Promise<RequiredAction[]>): void {
         this.onShowRequiredActionsCallback = callback;
     }
 
-    public onShowRequiredActions(onActionComplete: () => void): Promise<RequiredActions[]> {
+    public onShowRequiredActions(onActionComplete: () => void): Promise<RequiredAction[]> {
         return this.onShowRequiredActionsCallback?.(onActionComplete) || Promise.resolve([]);
     }
 
