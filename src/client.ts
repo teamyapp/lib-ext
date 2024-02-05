@@ -1,4 +1,4 @@
-import {ReactNode} from 'react';
+import {RenderFunc} from './ui';
 
 export interface ThirdPartyAppClient {
     getTeamId(): number | undefined;
@@ -6,5 +6,5 @@ export interface ThirdPartyAppClient {
     linkAccount(authProvider: string): void;
     getResourceUrl(appPacketRelativePath: string): string;
     getTaskPath(teamId: number, taskId: number): string;
-    showDynamicFeedback(feedbackView: ReactNode): void;
+    showDynamicFeedback(renderFunc: RenderFunc): void;
 }

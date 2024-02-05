@@ -1,12 +1,12 @@
-import {ReactNode} from 'react';
+import {RenderFunc} from './ui';
 
-export interface RequiredActions {
+export interface RequiredAction {
     actionName: string;
-    view: ReactNode;
+    renderView: RenderFunc;
 }
 
 export interface TaskIdAction {
     key: string;
-    view: ReactNode;
-    execute: (taskId: number) => void;
+    renderView: RenderFunc;
+    execute: () => void;
 }
