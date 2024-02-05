@@ -1,12 +1,12 @@
 import {RequiredAction, TaskIdAction} from './actions';
-import {ReactNode} from 'react';
+import {CleanupFunc, RenderFunc} from './ui';
 
 export interface ThirdPartyAppEventListener {
     listenOnShowRequiredActions(callback: (onActionComplete: () => void) => Promise<RequiredAction[]>): void;
 
     listenOnShowTaskIdActions(callback: (taskId: number) => TaskIdAction[]): void;
 
-    listenOnShowAppSetting(callback: () => ReactNode): void;
+    listenOnShowAppSetting(callback: RenderFunc): void;
 }
 
 export interface ThirdPartyAppEventPublisher {
@@ -14,14 +14,14 @@ export interface ThirdPartyAppEventPublisher {
 
     onShowTaskIdActions(taskId: number): TaskIdAction[];
 
-    onShowAppSetting(): ReactNode;
+    onShowAppSetting(container: HTMLElement): CleanupFunc | undefined;
 }
 
 export class ThirdPartyAppEventHub implements ThirdPartyAppEventListener, ThirdPartyAppEventPublisher {
     private readonly _appId: number;
     private onShowRequiredActionsCallback?: (onActionComplete: () => void) => Promise<RequiredAction[]>;
     private onShowTaskIdActionsCallback?: (taskId: number) => TaskIdAction[];
-    private onShowAppSettingCallback?: () => ReactNode;
+    private onShowAppSettingCallback?: RenderFunc;
 
     constructor(_appId: number) {
         this._appId = _appId;
@@ -47,11 +47,11 @@ export class ThirdPartyAppEventHub implements ThirdPartyAppEventListener, ThirdP
         return this.onShowTaskIdActionsCallback?.(taskId) || [];
     }
 
-    public listenOnShowAppSetting(callback: () => ReactNode): void {
+    public listenOnShowAppSetting(callback: RenderFunc): void {
         this.onShowAppSettingCallback = callback;
     }
 
-    public onShowAppSetting(): ReactNode {
-        return this.onShowAppSettingCallback?.();
+    public onShowAppSetting(container: HTMLElement): CleanupFunc | undefined {
+        return this.onShowAppSettingCallback?.(container);
     }
 }
